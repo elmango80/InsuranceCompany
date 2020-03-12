@@ -1,26 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
-using MNG.Infrastructure.Contracts;
 using MNG.Domain.Entities;
+using MNG.Domain.Values;
+using MNG.Infrastructure.Contracts;
+using MNG.Infrastructure.Models;
+using MNG.Infrastructure.Helpers;
 
 using Omu.ValueInjecter;
-using MNG.Domain.Values;
-using MNG.Infrastructure.Models;
-using MNG.Infrastucture.Helpers;
 
 namespace MNG.Infrastructure.Repositories
 {
     public class PoliciesRespository : IRepository<Policy>
     {
-        ModelsResponse<Policy> IRepository<Policy>.GetData()
+        public ModelsResponse<Policy> GetData()
         {
             var result = new ModelsResponse<Policy>();
-            var clients = ResourcesHandler.Load<Client>(AddressValues.POLICIES, TableNameValues.POLICIES);
+            var clients = ResourcesHandler.Load<Policy>(AddressValues.POLICIES, TableNameValues.POLICIES);
 
             if (!clients.IsValid)
             {
-                result.NotValid(clients.Message);
+                result.NotValidResponse(clients.Message);
 
                 return result;
             }

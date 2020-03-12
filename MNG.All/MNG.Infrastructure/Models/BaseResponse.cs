@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MNG.Infrastructure.Models
+﻿namespace MNG.Infrastructure.Models
 {
     public class BaseResponse
     {

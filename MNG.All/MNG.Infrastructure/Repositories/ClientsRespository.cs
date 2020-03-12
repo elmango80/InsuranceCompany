@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 using MNG.Domain.Entities;
 using MNG.Domain.Values;
 using MNG.Infrastructure.Contracts;
 using MNG.Infrastructure.Models;
-using MNG.Infrastucture.Helpers;
+using MNG.Infrastructure.Helpers;
+
 using Omu.ValueInjecter;
 
 namespace MNG.Infrastructure.Repositories
@@ -19,7 +19,7 @@ namespace MNG.Infrastructure.Repositories
 
             if (!clients.IsValid)
             {
-                result.NotValid(clients.Message);
+                result.NotValidResponse(clients.Message);
 
                 return result;
             }

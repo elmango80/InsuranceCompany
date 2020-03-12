@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Net;
 
+using MNG.Domain.Values;
 using MNG.Infrastructure.Models;
-using MNG.Infrastucture.Helpers;
+using MNG.Infrastructure.Helpers;
 
 using Newtonsoft.Json;
 
@@ -16,20 +17,19 @@ namespace MNG.Infrastructure
         {
             var result = new ModelsResponse<T>();
             string data = string.Empty;
-            
-            using WebClient webClient = new WebClient();
-            try
-            {
-                if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(tableName))
-                {
-                    throw new ArgumentNullException();
-                }
 
+            if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(tableName))
+            {
+                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+            }
+
+            using var webClient = new WebClient();
+            {
                 data = webClient.DownloadString(address);
 
                 if (string.IsNullOrEmpty(data))
                 {
-                    throw new JsonReaderException($"No data was obtained regarding {nameof(T).ToLower()}");
+                    throw new JsonReaderException(string.Format(ErrorMessageValues.JSON_READER, nameof(T).ToLower()));
                 }
 
                 DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(data);
@@ -44,19 +44,9 @@ namespace MNG.Infrastructure
 
                 result.IsValid = true;
                 result.Models = JsonConvert.DeserializeObject<IEnumerable<T>>(data);
-
-                return result;
             }
-            catch (Exception ex)
-            {
-                //TODO: Log error when not returning API data
-                result.HandlerException(ex, "", nameof(ResourcesHandler), nameof(Load));
 
-                result.IsValid = false;
-                result.Message = ex.Message;
-
-                return result;
-            }
+            return result;
         }
     }
 }
