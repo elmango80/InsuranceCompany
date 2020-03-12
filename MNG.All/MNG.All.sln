@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MNG.API", "MNG.API\MNG.API.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MNG.Domain", "MNG.Domain\MNG.Domain.csproj", "{C58B587B-9D0A-49CA-B2FF-E54314BBE0B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MNG.Infrastucture", "MNG.Infrastucture\MNG.Infrastucture.csproj", "{C5A01542-C271-4348-9073-015E63075850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C58B587B-9D0A-49CA-B2FF-E54314BBE0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C58B587B-9D0A-49CA-B2FF-E54314BBE0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C58B587B-9D0A-49CA-B2FF-E54314BBE0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A01542-C271-4348-9073-015E63075850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A01542-C271-4348-9073-015E63075850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A01542-C271-4348-9073-015E63075850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A01542-C271-4348-9073-015E63075850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
