@@ -30,23 +30,15 @@ namespace MNG.Application.Services
 
             if (string.IsNullOrEmpty(id))
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
             
             var clients = _clientsRepository.GetData();
-
-            if (!clients.IsValid)
-            {
-                result.NotValidResponse(clients.Message);
-
-                return result;
-            }
-
             var client = clients.Models.SingleOrDefault(c => c.IdClient == id);
 
             if (client == null)
             {
-                result.ValidResponse(string.Format(ErrorMessageValues.CLIENT_NOT_FOUND, nameof(id), id));
+                result.ValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(id), id));
 
                 return result;
             }
@@ -57,20 +49,22 @@ namespace MNG.Application.Services
             return result;
         }
 
-        public ModelResponse<ClientDTO> GetByIdPolicy(string idPolicy)
+        public ModelResponse<ClientDTO> GetClientByIdPolicy(string idPolicy)
         {
             var result = new ModelResponse<ClientDTO>();
 
             if (string.IsNullOrEmpty(idPolicy)) 
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
 
             var politicyDTO = _policiesService.GetPolicyById(idPolicy);
 
-            if (!politicyDTO.IsValid)
+            if (politicyDTO.IsValid && politicyDTO.Model == null)
             {
-                result.NotValidResponse(politicyDTO.Message);
+                result.ValidResponse(politicyDTO.Message);
+
+                return result;
             }
 
             return GetClientById(politicyDTO.Model.IdClient);
@@ -82,7 +76,7 @@ namespace MNG.Application.Services
 
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
 
             var clients = _clientsRepository.GetData();
@@ -98,7 +92,7 @@ namespace MNG.Application.Services
 
             if (client == null)
             {
-                result.ValidResponse(string.Format(ErrorMessageValues.CLIENT_NOT_FOUND, nameof(name), name));
+                result.ValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(name), name));
 
                 return result;
             }
@@ -115,7 +109,7 @@ namespace MNG.Application.Services
 
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
             
             var clientDTO = GetClientByName(name);

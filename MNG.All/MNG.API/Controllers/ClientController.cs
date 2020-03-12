@@ -75,7 +75,7 @@ namespace MNG.API.Controllers
         {
             try
             {
-                var response = _clientService.GetByIdPolicy(idPolity);
+                var response = _clientService.GetClientByIdPolicy(idPolity);
 
                 return JsonConvert.SerializeObject(response);
             }

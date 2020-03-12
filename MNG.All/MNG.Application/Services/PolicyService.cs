@@ -28,7 +28,7 @@ namespace MNG.Application.Services
 
             if (string.IsNullOrEmpty(id))
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
 
             var policies = _policiesRepository.GetData();
@@ -36,7 +36,7 @@ namespace MNG.Application.Services
 
             if (policy == null)
             {
-                result.ValidResponse(string.Format(ErrorMessageValues.POLICY_NOT_FOUND, nameof(id), id));
+                result.ValidResponse(string.Format(MessageValues.POLICY_NOT_FOUND, nameof(id), id));
 
                 return result;
             }
@@ -53,7 +53,7 @@ namespace MNG.Application.Services
 
             if (string.IsNullOrEmpty(idClient))
             {
-                throw new ArgumentNullException(string.Empty, ErrorMessageValues.ARGUMENT_NULL);
+                throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
 
             var policies = _policiesRepository.GetData();
@@ -61,7 +61,7 @@ namespace MNG.Application.Services
 
             if (!policiesLinked.Any())
             {
-                result.ValidResponse(ErrorMessageValues.CLIENT_NOT_LINKED_POLICIES);
+                result.ValidResponse(MessageValues.CLIENT_NOT_LINKED_POLICIES);
 
                 return result;
             }

@@ -15,17 +15,17 @@ namespace MNG.Infrastructure.Repositories
         public ModelsResponse<Policy> GetData()
         {
             var result = new ModelsResponse<Policy>();
-            var clients = ResourcesHandler.Load<Policy>(AddressValues.POLICIES, TableNameValues.POLICIES);
+            var policies = ResourcesHandler.Load<Policy>(AddressValues.POLICIES, TableNameValues.POLICIES);
 
-            if (!clients.IsValid)
+            if (!policies.Any())
             {
-                result.NotValidResponse(clients.Message);
+                result.ValidResponse(MessageValues.POLICIES_REPOSITORY_EMPTY);
 
                 return result;
             }
 
             result.IsValid = true;
-            result.Models = clients.Models.Select(c => (Policy)new Policy().InjectFrom(c));
+            result.Models = policies.Select(c => (Policy)new Policy().InjectFrom(c));
 
             return result;
         }

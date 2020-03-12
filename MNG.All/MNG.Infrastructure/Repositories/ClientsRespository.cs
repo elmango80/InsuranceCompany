@@ -17,15 +17,15 @@ namespace MNG.Infrastructure.Repositories
             var result = new ModelsResponse<Client>();
             var clients = ResourcesHandler.Load<Client>(AddressValues.CLIENTS, TableNameValues.CLIENTS);
 
-            if (!clients.IsValid)
+            if (!clients.Any())
             {
-                result.NotValidResponse(clients.Message);
+                result.ValidResponse(MessageValues.CLIENTS_REPOSITORY_EMPTY);
 
                 return result;
             }
 
             result.IsValid = true;
-            result.Models = clients.Models.Select(c => (Client)new Client().InjectFrom(c));
+            result.Models = clients.Select(c => (Client)new Client().InjectFrom(c));
 
             return result;
         }

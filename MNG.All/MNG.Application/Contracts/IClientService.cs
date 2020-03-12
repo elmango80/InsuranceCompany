@@ -11,6 +11,6 @@ namespace MNG.Application.Contracts
 
         ModelsResponse<PolicyDTO> GetPoliciesLinkedByName(string name);
 
-        ModelResponse<ClientDTO> GetByIdPolicy(string idPolicy);
+        ModelResponse<ClientDTO> GetClientByIdPolicy(string idPolicy);
     }
 }

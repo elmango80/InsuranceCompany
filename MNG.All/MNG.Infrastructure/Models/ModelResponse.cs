@@ -2,11 +2,11 @@
 {
     public class ModelResponse<T> : BaseResponse where T : class, new()
     {
+        public T Model { get; set; }
+
         public ModelResponse()
         {
-            Model = new T();
+            Model = default;
         }
-
-        public T Model { get; set; }
     }
 }
