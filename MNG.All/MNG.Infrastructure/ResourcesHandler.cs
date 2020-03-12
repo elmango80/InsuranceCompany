@@ -46,7 +46,9 @@ namespace MNG.Infrastructure
                 throw new NullReferenceException();
             }
 
-            return dataTable.AsEnumerable().Select(t => (T)new T().InjectFrom(t));
+            data = JsonConvert.SerializeObject(dataTable);
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(data);
+            //return dataTable.AsEnumerable().Select(t => (T)new T().InjectFrom(t));
         }
     }
 }
