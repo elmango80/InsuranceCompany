@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MNG.Domain.Entities;
 using NUnit.Framework;
 
-namespace MNG.Infrastructure.Test
+namespace MNG.Infrastructure.UnitTest
 {
     [TestFixture]
-    class ClientsRespositoryShould
+    public class PolityRespositoryShould
     {
         [SetUp]
         public void Setup()
