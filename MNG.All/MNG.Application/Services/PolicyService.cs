@@ -36,7 +36,7 @@ namespace MNG.Application.Services
 
             if (policy == null)
             {
-                result.ValidResponse(string.Format(MessageValues.POLICY_NOT_FOUND, nameof(id), id));
+                result.NotValidResponse(string.Format(MessageValues.POLICY_NOT_FOUND, nameof(id), id));
 
                 return result;
             }
@@ -47,7 +47,7 @@ namespace MNG.Application.Services
             return result;
         }
 
-        public ModelsResponse<PolicyDTO> GetPoliciesByIdClient(string idClient)
+        public ModelsResponse<PolicyDTO> GetPoliciesLinkedByIdClient(string idClient)
         {
             var result = new ModelsResponse<PolicyDTO>();
 
@@ -61,7 +61,7 @@ namespace MNG.Application.Services
 
             if (!policiesLinked.Any())
             {
-                result.ValidResponse(MessageValues.CLIENT_NOT_LINKED_POLICIES);
+                result.NotValidResponse(MessageValues.CLIENT_NOT_LINKED_POLICIES);
 
                 return result;
             }

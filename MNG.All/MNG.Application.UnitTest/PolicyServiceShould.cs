@@ -67,7 +67,7 @@ namespace MNG.Application.UnitTest
             string id = idPolicyNotExists;
             var result = _policyService.GetPolicyById(id);
 
-            Assert.IsTrue(result.IsValid);
+            Assert.IsFalse(result.IsValid);
             Assert.AreEqual(string.Format(MessageValues.POLICY_NOT_FOUND, nameof(id), id), result.Message);
         }
 
@@ -84,28 +84,28 @@ namespace MNG.Application.UnitTest
 
         [Test]
         [Category("CheckingExceptions")]
-        public void GetPoliciesByIdClient_IfParameterIsNullOrEmpty_ReturnArgumentNullException()
+        public void GetPoliciesLinkedByIdClient_IfParameterIsNullOrEmpty_ReturnArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _policyService.GetPoliciesByIdClient(It.IsAny<string>()));
+            Assert.Throws<ArgumentNullException>(() => _policyService.GetPoliciesLinkedByIdClient(It.IsAny<string>()));
         }
 
         [Test]
         [Category("CheckingFunctionality")]
-        public void GetPoliciesByIdClient_IfIdClientNotExist_ReturnMessageNotLinkedPolicies()
+        public void GetPoliciesLinkedByIdClient_IfIdClientNotExist_ReturnMessageNotLinkedPolicies()
         {
             string idClient = idClientNotExists;
-            var result = _policyService.GetPoliciesByIdClient(idClient);
+            var result = _policyService.GetPoliciesLinkedByIdClient(idClient);
 
-            Assert.IsTrue(result.IsValid);
+            Assert.IsFalse(result.IsValid);
             Assert.AreEqual(MessageValues.CLIENT_NOT_LINKED_POLICIES, result.Message);
         }
 
         [Test]
         [Category("CheckingFunctionality")]
-        public void GetPoliciesByIdClient_IfIdClientExist_ReturnPoliciesLinkedModel()
+        public void GetPoliciesLinkedByIdClient_IfIdClientExist_ReturnPoliciesLinkedModel()
         {
             string idClient = idClientExists;
-            var result = _policyService.GetPoliciesByIdClient(idClient);
+            var result = _policyService.GetPoliciesLinkedByIdClient(idClient);
 
             Assert.IsTrue(result.IsValid);
             Assert.IsNotEmpty(result.Models);

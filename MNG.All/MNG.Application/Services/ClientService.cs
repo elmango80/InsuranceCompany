@@ -38,7 +38,7 @@ namespace MNG.Application.Services
 
             if (client == null)
             {
-                result.ValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(id), id));
+                result.NotValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(id), id));
 
                 return result;
             }
@@ -60,9 +60,9 @@ namespace MNG.Application.Services
 
             var politicyDTO = _policiesService.GetPolicyById(idPolicy);
 
-            if (politicyDTO.IsValid && politicyDTO.Model == null)
+            if (!politicyDTO.IsValid)
             {
-                result.ValidResponse(politicyDTO.Message);
+                result.NotValidResponse(politicyDTO.Message);
 
                 return result;
             }
@@ -80,19 +80,11 @@ namespace MNG.Application.Services
             }
 
             var clients = _clientsRepository.GetData();
-
-            if (!clients.IsValid)
-            {
-                result.NotValidResponse(clients.Message);
-
-                return result;
-            }
-
             var client = clients.Models.SingleOrDefault(c => c.Name == name);
 
             if (client == null)
             {
-                result.ValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(name), name));
+                result.NotValidResponse(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(name), name));
 
                 return result;
             }
@@ -121,7 +113,7 @@ namespace MNG.Application.Services
                 return result;
             }
 
-            return _policiesService.GetPoliciesByIdClient(clientDTO.Model.IdClient);
+            return _policiesService.GetPoliciesLinkedByIdClient(clientDTO.Model.IdClient);
         }
     }
 }

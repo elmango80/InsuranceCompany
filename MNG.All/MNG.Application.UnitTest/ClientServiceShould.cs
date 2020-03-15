@@ -69,7 +69,7 @@ namespace MNG.Application.UnitTest
             _policyServiceMock.Setup(m => m.GetPolicyById(idPolicyNotLinked))
                 .Returns(new ModelResponse<PolicyDTO> 
                 { 
-                    IsValid = true, 
+                    IsValid = false, 
                     Message = string.Format(MessageValues.POLICY_NOT_FOUND, "id", idPolicyNotLinked) 
                 });
 
@@ -90,7 +90,7 @@ namespace MNG.Application.UnitTest
             string id = idClientNotExists;
             var result = _clientService.GetClientById(id);
 
-            Assert.IsTrue(result.IsValid);
+            Assert.IsFalse(result.IsValid);
             Assert.AreEqual(string.Format(MessageValues.CLIENT_NOT_FOUND, nameof(id), id), result.Message);
         }
 
@@ -119,7 +119,7 @@ namespace MNG.Application.UnitTest
             string id = idPolicyNotLinked;
             var result = _clientService.GetClientByIdPolicy(id);
 
-            Assert.IsTrue(result.IsValid);
+            Assert.IsFalse(result.IsValid);
             Assert.AreEqual(string.Format(MessageValues.POLICY_NOT_FOUND, nameof(id), id), result.Message);
         }
 

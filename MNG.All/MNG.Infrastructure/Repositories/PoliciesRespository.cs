@@ -19,7 +19,7 @@ namespace MNG.Infrastructure.Repositories
 
             if (!policies.Any())
             {
-                result.ValidResponse(MessageValues.POLICIES_REPOSITORY_EMPTY);
+                result.NotValidResponse(MessageValues.POLICIES_REPOSITORY_EMPTY);
 
                 return result;
             }

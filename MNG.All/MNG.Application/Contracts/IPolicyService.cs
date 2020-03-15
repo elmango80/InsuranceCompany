@@ -7,6 +7,6 @@ namespace MNG.Application.Contracts
     {
         ModelResponse<PolicyDTO> GetPolicyById(string id);
 
-        ModelsResponse<PolicyDTO> GetPoliciesByIdClient(string idClient);
+        ModelsResponse<PolicyDTO> GetPoliciesLinkedByIdClient(string idClient);
     }
 }
