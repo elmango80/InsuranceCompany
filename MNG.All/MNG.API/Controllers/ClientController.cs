@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 
 using MNG.Application.Contracts;
 using MNG.Infrastructure.Extensions;
+using MNG.Infrastructure.Models;
 
 using Newtonsoft.Json;
 
@@ -23,88 +24,82 @@ namespace MNG.API.Controllers
             _logger = logger;
         }
 
-        /// <summary>
-        /// Get client information searching by your ID.
-        /// </summary>        
-        /// <param id="a74c83c5-e271-4ecf-a429-d47af952cfd4"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         [ActionName("get-by-id")]
-        public string GetById(string id)
+        [Authorize(Roles = "admin, user")]
+        public IActionResult GetById(string id)
         {
             try
             {
                 var response =  _clientService.GetClientById(id);
 
-                return JsonConvert.SerializeObject(response);
+                return HandlerResponse(response, response.Model);
             }
             catch (System.Exception ex)
             {
-                return JsonConvert.SerializeObject(ex.HandlerException(_logger));
+                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
             }
         }
 
-        /// <summary>
-        /// Get client information searching by your name.
-        /// </summary>        
-        /// <param id="Barnett"></param>
-        /// <returns></returns>
         [HttpGet("{name}")]
         [ActionName("get-by-name")]
-        public string GetByName(string name)
+        [Authorize(Roles = "admin, user")]
+        public IActionResult GetByName(string name)
         {
             try
             {
                 var response = _clientService.GetClientByName(name);
 
-                return JsonConvert.SerializeObject(response);
+                return HandlerResponse(response, response.Model);
             }
             catch (System.Exception ex)
             {
-                return JsonConvert.SerializeObject(ex.HandlerException(_logger));
+                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
             }
         }
 
-        /// <summary>
-        /// Get policies linked to client searching by your name.
-        /// </summary>        
-        /// <param id="Barnett"></param>
-        /// <returns></returns>
         [HttpGet("{name}")]
         [ActionName("get-policies-linked-by-name")]
-        public string GetPoliciesLinkedByName(string name)
+        [Authorize(Roles = "admin")]
+        public IActionResult GetPoliciesLinkedByName(string name)
         {
             try
             {
                 var response = _clientService.GetPoliciesLinkedByName(name);
 
-                return JsonConvert.SerializeObject(response);
+                return HandlerResponse(response, response.Models);
             }
             catch (System.Exception ex)
             {
-                return JsonConvert.SerializeObject(ex.HandlerException(_logger));
+                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
             }
         }
 
-        /// <summary>
-        /// Get client information searching by polity ID.
-        /// </summary>        
-        /// <param id="79c689f3-053a-459b-8c88-32a699817097"></param>
-        /// <returns></returns>
         [HttpGet("{idPolity}")]
         [ActionName("get-by-policy-id")]
-        public string GetClientByIdPolicy(string idPolity)
+        [Authorize(Roles = "admin")]
+        public IActionResult GetClientLinkedByIdPolicy(string idPolity)
         {
             try
             {
                 var response = _clientService.GetClientByIdPolicy(idPolity);
 
-                return JsonConvert.SerializeObject(response);
+                return HandlerResponse(response, response.Model);
             }
             catch (System.Exception ex)
             {
-                return JsonConvert.SerializeObject(ex.HandlerException(_logger));
+                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
             }
+        }
+
+        private IActionResult HandlerResponse(ResponseBase response, object data)
+        {
+            if (!response.IsValid)
+            {
+                return NotFound(JsonConvert.SerializeObject(response.Message));
+            }
+
+            return Ok(JsonConvert.SerializeObject(data));
         }
     }
 }

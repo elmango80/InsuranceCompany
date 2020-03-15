@@ -30,7 +30,7 @@ namespace MNG.Application.UnitTest
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            var data = new ModelsResponse<Client>
+            var data = new ResponseModels<Client>
             {
                 IsValid = true,
                 Message = string.Empty,
@@ -46,7 +46,7 @@ namespace MNG.Application.UnitTest
                 }
             };
 
-            var policyLinked = new ModelResponse<PolicyDTO>
+            var policyLinked = new ResponseModel<PolicyDTO>
             {
                 IsValid = true,
                 Message = string.Empty,
@@ -67,7 +67,7 @@ namespace MNG.Application.UnitTest
             _policyServiceMock = new Mock<IPolicyService>();
             _policyServiceMock.Setup(m => m.GetPolicyById(idPolicyLinked)).Returns(policyLinked);
             _policyServiceMock.Setup(m => m.GetPolicyById(idPolicyNotLinked))
-                .Returns(new ModelResponse<PolicyDTO> 
+                .Returns(new ResponseModel<PolicyDTO> 
                 { 
                     IsValid = false, 
                     Message = string.Format(MessageValues.POLICY_NOT_FOUND, "id", idPolicyNotLinked) 

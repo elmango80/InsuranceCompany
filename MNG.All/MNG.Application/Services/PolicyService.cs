@@ -22,9 +22,9 @@ namespace MNG.Application.Services
             _policiesRepository = policiesRepository;
         }
 
-        public ModelResponse<PolicyDTO> GetPolicyById(string id)
+        public ResponseModel<PolicyDTO> GetPolicyById(string id)
         {
-            var result = new ModelResponse<PolicyDTO>();
+            var result = new ResponseModel<PolicyDTO>();
 
             if (string.IsNullOrEmpty(id))
             {
@@ -32,7 +32,8 @@ namespace MNG.Application.Services
             }
 
             var policies = _policiesRepository.GetData();
-            var policy = policies.Models.SingleOrDefault(p => p.IdPolicy == id);
+            var policy = policies.Models.SingleOrDefault(p =>
+                string.Equals(p.IdPolicy, id, StringComparison.InvariantCultureIgnoreCase));
 
             if (policy == null)
             {
@@ -47,9 +48,9 @@ namespace MNG.Application.Services
             return result;
         }
 
-        public ModelsResponse<PolicyDTO> GetPoliciesLinkedByIdClient(string idClient)
+        public ResponseModels<PolicyDTO> GetPoliciesLinkedByIdClient(string idClient)
         {
-            var result = new ModelsResponse<PolicyDTO>();
+            var result = new ResponseModels<PolicyDTO>();
 
             if (string.IsNullOrEmpty(idClient))
             {

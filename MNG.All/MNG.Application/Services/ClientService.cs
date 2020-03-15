@@ -24,9 +24,9 @@ namespace MNG.Application.Services
             _policiesService = policiesService;
         }
 
-        public ModelResponse<ClientDTO> GetClientById(string id)
+        public ResponseModel<ClientDTO> GetClientById(string id)
         {
-            var result = new ModelResponse<ClientDTO>();
+            var result = new ResponseModel<ClientDTO>();
 
             if (string.IsNullOrEmpty(id))
             {
@@ -34,7 +34,7 @@ namespace MNG.Application.Services
             }
             
             var clients = _clientsRepository.GetData();
-            var client = clients.Models.SingleOrDefault(c => c.IdClient == id);
+            var client = clients.Models.SingleOrDefault(c => string.Equals(c.IdClient, id, StringComparison.InvariantCultureIgnoreCase));
 
             if (client == null)
             {
@@ -49,9 +49,9 @@ namespace MNG.Application.Services
             return result;
         }
 
-        public ModelResponse<ClientDTO> GetClientByIdPolicy(string idPolicy)
+        public ResponseModel<ClientDTO> GetClientByIdPolicy(string idPolicy)
         {
-            var result = new ModelResponse<ClientDTO>();
+            var result = new ResponseModel<ClientDTO>();
 
             if (string.IsNullOrEmpty(idPolicy)) 
             {
@@ -70,9 +70,9 @@ namespace MNG.Application.Services
             return GetClientById(politicyDTO.Model.IdClient);
         }
 
-        public ModelResponse<ClientDTO> GetClientByName(string name)
+        public ResponseModel<ClientDTO> GetClientByName(string name)
         {
-            var result = new ModelResponse<ClientDTO>();
+            var result = new ResponseModel<ClientDTO>();
 
             if (string.IsNullOrEmpty(name))
             {
@@ -80,7 +80,7 @@ namespace MNG.Application.Services
             }
 
             var clients = _clientsRepository.GetData();
-            var client = clients.Models.SingleOrDefault(c => c.Name == name);
+            var client = clients.Models.SingleOrDefault(c => string.Equals(c.Name, name, StringComparison.InvariantCultureIgnoreCase));
 
             if (client == null)
             {
@@ -95,15 +95,15 @@ namespace MNG.Application.Services
             return result;
         }
 
-        public ModelsResponse<PolicyDTO> GetPoliciesLinkedByName(string name)
+        public ResponseModels<PolicyDTO> GetPoliciesLinkedByName(string name)
         {
-            var result = new ModelsResponse<PolicyDTO>();
+            var result = new ResponseModels<PolicyDTO>();
 
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(string.Empty, MessageValues.ARGUMENT_NULL);
             }
-            
+
             var clientDTO = GetClientByName(name);
 
             if (!clientDTO.IsValid)

@@ -36,12 +36,11 @@ namespace MNG.API
             var tokenSettingsSection = _configuration.GetSection(ConfigurationKeys.TokenSetting);
             var tokenSetting = tokenSettingsSection.Get<TokenSetting>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddTransient<IRepository<Client>, ClientsRespository>();
             services.AddTransient<IRepository<Policy>, PoliciesRespository>();
             services.AddTransient<IClientService, ClientService>();
-            services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IPolicyService, PolicyService>();
 
             services.Configure<TokenSetting>(tokenSettingsSection);
@@ -74,11 +73,9 @@ namespace MNG.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

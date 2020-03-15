@@ -12,9 +12,9 @@ namespace MNG.Infrastructure.Repositories
 {
     public class ClientsRespository : IRepository<Client>
     {
-        public ModelsResponse<Client> GetData()
+        public ResponseModels<Client> GetData()
         {
-            var result = new ModelsResponse<Client>();
+            var result = new ResponseModels<Client>();
             var clients = ResourcesHandler.Load<Client>(AddressValues.CLIENTS, TableNameValues.CLIENTS);
 
             if (!clients.Any())

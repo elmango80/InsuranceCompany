@@ -12,9 +12,9 @@ namespace MNG.Infrastructure.Repositories
 {
     public class PoliciesRespository : IRepository<Policy>
     {
-        public ModelsResponse<Policy> GetData()
+        public ResponseModels<Policy> GetData()
         {
-            var result = new ModelsResponse<Policy>();
+            var result = new ResponseModels<Policy>();
             var policies = ResourcesHandler.Load<Policy>(AddressValues.POLICIES, TableNameValues.POLICIES);
 
             if (!policies.Any())

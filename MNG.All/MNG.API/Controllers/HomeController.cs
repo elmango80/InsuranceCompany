@@ -1,25 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
 using MNG.API.Code.Contracts;
 using MNG.API.Models;
 using MNG.Application.Contracts;
 using MNG.Infrastructure.Extensions;
+
 using Newtonsoft.Json;
+
+using Omu.ValueInjecter;
 
 namespace MNG.API.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[action]")]
     public class HomeController : ControllerBase
     {
         private readonly ITokenManager _tokenManager;
-        private readonly ILoginService _loginService;
+        private readonly IClientService _clientService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ITokenManager tokenManager, ILoginService loginService, ILogger<HomeController> logger)
+        public HomeController(ITokenManager tokenManager, IClientService clientService, ILogger<HomeController> logger)
         {
             _tokenManager = tokenManager;
-            _loginService = loginService;
+            _clientService = clientService;
             _logger = logger;
         }
 
@@ -30,26 +36,22 @@ namespace MNG.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Token([FromBody] string userEmail)
+        public IActionResult Token([FromBody] User userLogin)
         {
+
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
-                var userLogged = _loginService.LoginUser(userEmail);
+                var userLogged = _clientService.GetClientByName(userLogin.Name);
 
                 if (!userLogged.IsValid)
                 {
-                    return BadRequest(JsonConvert.SerializeObject(userLogged.Message));
+                    return NotFound(JsonConvert.SerializeObject(userLogged.Message));
                 }
 
-                var currentUser = new User
-                {
-                    Email = userLogged.Model.Email,
-                    Role = userLogged.Model.Role
-                };
-
+                var currentUser = (User)new User().InjectFrom(userLogged.Model);
                 var tokenJWR = _tokenManager.GetJWT(currentUser);
 
                 return Ok(JsonConvert.SerializeObject(tokenJWR));
@@ -58,17 +60,6 @@ namespace MNG.API.Controllers
             {
                 return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
             }
-            
-
-            //if (result != null)
-            //{
-            //    var result = _tokenManager.GetJWT(result);
-
-            //    return Ok(result);
-            //}
-
-            //return Ok(userLogged);
-
         }
     }
 }

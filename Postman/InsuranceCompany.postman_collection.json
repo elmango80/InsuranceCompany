@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "b5df12d1-763b-4392-a5d5-1eb7e5bd7026",
+		"name": "InsuranceCompany",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetClientById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NTYwMTI5MC04NjE5LTRmNTQtYjgzMS05YzZjMjZjNTJiNDQiLCJlbWFpbCI6Im9waGVsaWFibGFua2Vuc2hpcEBxdW90ZXphcnQuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6Ik9waGVsaWEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwianRpIjoiOGQ2ZjFiOTctNjY0OC00MGE1LThlYTYtZGEyOTcxZmZmNDAzIiwiZXhwIjoxNTg0MjU3MTMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo4MDgwIiwiYXVkIjoiTU5HIEluc3VyYW5jZSBDb21wYW55In0.O1rGROe7NrY28zs3t_6OXJJewBCXExa4RgB3ek9F5fo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44330/api/client/get-by-id/a0ece5db-cd14-4f21-812f-966633e7be86",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"client",
+						"get-by-id",
+						"a0ece5db-cd14-4f21-812f-966633e7be86"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClientByName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NTYwMTI5MC04NjE5LTRmNTQtYjgzMS05YzZjMjZjNTJiNDQiLCJlbWFpbCI6Im9waGVsaWFibGFua2Vuc2hpcEBxdW90ZXphcnQuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6Ik9waGVsaWEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwianRpIjoiOGQ2ZjFiOTctNjY0OC00MGE1LThlYTYtZGEyOTcxZmZmNDAzIiwiZXhwIjoxNTg0MjU3MTMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo4MDgwIiwiYXVkIjoiTU5HIEluc3VyYW5jZSBDb21wYW55In0.O1rGROe7NrY28zs3t_6OXJJewBCXExa4RgB3ek9F5fo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44330/api/client/get-by-name/Mae",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"client",
+						"get-by-name",
+						"Mae"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPoliciesLinkedByName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJCcml0bmV5IiwianRpIjoiNThiZGQ0ZmYtODc3MC00OWIxLWI5N2UtZWVjY2Q5M2IzZGMxIiwiZXhwIjoxNTg0MjQ5OTM0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo4MDgwIiwiYXVkIjoiTU5HIEluc3VyYW5jZSBDb21wYW55In0.nEZRX9PdLbhJvpaWkFUokgqnStw_BQckkve_GqGEgxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44330/api/client/get-policies-linked-by-name/Ophelia",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"client",
+						"get-policies-linked-by-name",
+						"Ophelia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetClientByIdPolicy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NTYwMTI5MC04NjE5LTRmNTQtYjgzMS05YzZjMjZjNTJiNDQiLCJlbWFpbCI6Im9waGVsaWFibGFua2Vuc2hpcEBxdW90ZXphcnQuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6Ik9waGVsaWEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwianRpIjoiOGQ2ZjFiOTctNjY0OC00MGE1LThlYTYtZGEyOTcxZmZmNDAzIiwiZXhwIjoxNTg0MjU3MTMzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo4MDgwIiwiYXVkIjoiTU5HIEluc3VyYW5jZSBDb21wYW55In0.O1rGROe7NrY28zs3t_6OXJJewBCXExa4RgB3ek9F5fo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44330/api/client/get-by-policy-id/79c689f3-053a-459b-8c88-32a699817097",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"client",
+						"get-by-policy-id",
+						"79c689f3-053a-459b-8c88-32a699817097"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APIStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44330/api/Token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"Token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RequestToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ name: \"Britney\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44330/api/token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44330",
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

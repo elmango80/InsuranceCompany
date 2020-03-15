@@ -29,7 +29,7 @@ namespace MNG.Application.UnitTest
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            var data = new ModelsResponse<Policy>
+            var data = new ResponseModels<Policy>
             {
                 IsValid = true,
                 Message = string.Empty,
