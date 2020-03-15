@@ -1,5 +1,4 @@
 # MNG Insurance Company
-----
 
 As a insurance company we've been asked to develop an application that some information about our insurance policies and company clients. To do that, we have two services that provide us with all the data needed:
 * The list of company clients can be found at: 
@@ -15,7 +14,7 @@ http://www.mocky.io/v2/580891a4100000e8242b75c5
 | Get the user linked to a policy number | admin |
 
 ## Home Controller
-----
+
 * #### Status
   _Check API status._
 
@@ -73,7 +72,7 @@ http://www.mocky.io/v2/580891a4100000e8242b75c5
     });
   ```
 ## Client Controller
-----
+
 * #### Get Client by ID
 
   Get client information searching by your ID.
