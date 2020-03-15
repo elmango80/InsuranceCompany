@@ -37,7 +37,7 @@ namespace MNG.API.Controllers
             }
             catch (System.Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
+                return BadRequest(JsonConvert.SerializeObject(new { error = ex.HandlerException(_logger) }));
             }
         }
 
@@ -54,7 +54,7 @@ namespace MNG.API.Controllers
             }
             catch (System.Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
+                return BadRequest(JsonConvert.SerializeObject(new { error = ex.HandlerException(_logger) }));
             }
         }
 
@@ -71,24 +71,24 @@ namespace MNG.API.Controllers
             }
             catch (System.Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
+                return BadRequest(JsonConvert.SerializeObject(new { error = ex.HandlerException(_logger) }));
             }
         }
 
-        [HttpGet("{idPolity}")]
+        [HttpGet("{idPolicy}")]
         [ActionName("get-by-policy-id")]
         [Authorize(Roles = "admin")]
-        public IActionResult GetClientLinkedByIdPolicy(string idPolity)
+        public IActionResult GetClientLinkedByIdPolicy(string idPolicy)
         {
             try
             {
-                var response = _clientService.GetClientByIdPolicy(idPolity);
+                var response = _clientService.GetClientByIdPolicy(idPolicy);
 
                 return HandlerResponse(response, response.Model);
             }
             catch (System.Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
+                return BadRequest(JsonConvert.SerializeObject(new { error = ex.HandlerException(_logger) }));
             }
         }
 
@@ -96,7 +96,7 @@ namespace MNG.API.Controllers
         {
             if (!response.IsValid)
             {
-                return NotFound(JsonConvert.SerializeObject(response.Message));
+                return NotFound(JsonConvert.SerializeObject(new { error = response.Message }));
             }
 
             return Ok(JsonConvert.SerializeObject(data));

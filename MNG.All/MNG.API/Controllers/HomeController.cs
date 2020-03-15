@@ -32,7 +32,7 @@ namespace MNG.API.Controllers
         [HttpGet]
         public IActionResult Status()
         {
-            return Ok("Server OK!");
+            return Ok(new { status = "Server OK!" });
         }
 
         [HttpPost]
@@ -48,7 +48,7 @@ namespace MNG.API.Controllers
 
                 if (!userLogged.IsValid)
                 {
-                    return NotFound(JsonConvert.SerializeObject(userLogged.Message));
+                    return NotFound(JsonConvert.SerializeObject(new { error = userLogged.Message }));
                 }
 
                 var currentUser = (User)new User().InjectFrom(userLogged.Model);
@@ -58,7 +58,7 @@ namespace MNG.API.Controllers
             }
             catch (System.Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(ex.HandlerException(_logger)));
+                return BadRequest(JsonConvert.SerializeObject(new { error = ex.HandlerException(_logger) }));
             }
         }
     }

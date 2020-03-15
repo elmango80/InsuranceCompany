@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace MNG.API.Models
 {
@@ -7,6 +8,7 @@ namespace MNG.API.Models
         [JsonProperty("id")]
         public string IdClient { get; set; }
 
+        [Required]
         [JsonProperty("name")]
         public string Name { get; set; }
 
