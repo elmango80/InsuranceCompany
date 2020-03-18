@@ -1,6 +1,6 @@
 # MNG Insurance Company
 
-As a insurance company we've been asked to develop an application that some information about our insurance policies and company clients. To do that, we have two services that provide us with all the data needed:
+As a insurance company we've been asked to develop an application that manage some information about our insurance policies and company clients. To do that, we have two services that provide us with all the data needed:
 * The list of company clients can be found at: 
 http://www.mocky.io/v2/5808862710000087232b75ac
 * The list of company policies can be found at:
